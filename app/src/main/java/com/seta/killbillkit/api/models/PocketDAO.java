@@ -9,17 +9,20 @@ import android.database.sqlite.SQLiteDatabase;
 public class PocketDAO {
     private final static String TABLENAME = "pocket";
 
+    private final static String COLUMN_NAME = "NAME";
+    private final static String COLUMN_BILL_DAY = "BILL_DAY";
+    private final static String COLUMN_REPAY_DAY = "REPAY_DAY";
+    private final static String COLUMN_ASSUMED_DAY = "ASSUMED_DAY";
+    private final static String COLUMN_BALANCE = "BALANCE";
+
     public static void createTable(SQLiteDatabase database) {
         String sql = "create table if not exists " + TABLENAME + " (" +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT " +
-//                ", FORMAT TEXT  " +
-//                ", FSIZE INT  " +
-//                ", WIDTH INT  " +
-//                ", HEIGHT INT  " +
-//                ", UID TEXT  " +
-//                ", MEDIUM_PATH TEXT  " +
-//                ", FULL_PATH TEXT  " +
-//                ", DESCRIPTION TEXT " +
+                ", "+COLUMN_NAME+" TEXT  " +
+                ", "+COLUMN_BILL_DAY+" INT  " +
+                ", "+COLUMN_REPAY_DAY+" INT  " +
+                ", "+COLUMN_ASSUMED_DAY+" INT  " +
+                ", "+COLUMN_BALANCE+" INT  " +
                 " );";
         database.execSQL(sql);
     }
