@@ -5,8 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.seta.killbillkit.api.KApi;
-import com.seta.setakits.db.BaseDAOHelper;
+import com.seta.setakits.db.DAOHelper;
 import com.seta.setakits.db.DAOHelpable;
+import com.seta.setakits.db.BaseSQLiteHelper;
 import com.seta.setakits.logs.LogX;
 
 import java.util.ArrayList;
@@ -25,10 +26,18 @@ public class InoutDAO implements DAOHelpable<Inout> {
     private final static String COLUMN_OTHER_INFO = "OTHER_INFO";
     private final static String COLUMN_AMOUNT = "AMOUNT";
 
-    private BaseDAOHelper<Inout> mHelper;
+    private static InoutDAO sInoutDAO;
+    private DAOHelper<Inout> mHelper;
 
-    public InoutDAO(){
-        this.mHelper = new BaseDAOHelper<Inout>(TABLENAME,this);
+    private InoutDAO(){
+        this.mHelper = new DAOHelper<>(TABLENAME,this);
+    }
+
+    public static InoutDAO getInstance(){
+        if(sInoutDAO ==null){
+            sInoutDAO = new InoutDAO();
+        }
+        return sInoutDAO;
     }
 
     public static void createTable(SQLiteDatabase database) {
@@ -44,34 +53,42 @@ public class InoutDAO implements DAOHelpable<Inout> {
     }
 
     public static void updateTable(SQLiteDatabase db, int oldVersion, int newVersion){
+
     }
 
     //region 保存
     protected boolean save2DB(final Inout inout) {
-        return mHelper.saveOne(inout , KApi.getApi().getDbHelper());
+        return mHelper.saveOne(inout);
     }
 
     /**
      * 批量保存
      */
     protected void saveInTx(Collection<Inout> objects) {
-        mHelper.saveInTx(objects , KApi.getApi().getDbHelper() , true);
+        mHelper.saveInTx(objects);
     }
 
-    private Inout findInoutById(String id, boolean doClose){
-        return mHelper.findObjById( KApi.getApi().getDbHelper().getWritableDatabase() , id , doClose );
+    public Inout getUniqueInoutById(String uid){
+        return mHelper.getUniqueObjById(uid);
     }
-    //    protected static Inout findInoutById(String id, boolean doClose){
-//        List list = find(  "UID=?", new String[]{String.valueOf(id)}, null, null, "1" , doClose);
-//        if (list.isEmpty()) return null;
-//        Object obj = list.get(0);
-//        if(obj instanceof Inout){
-//            return (Inout)obj;
-//        }
-//        return null;
-//    }
+
     protected ArrayList<Inout> findAll(){
-        return mHelper.findAll(KApi.getApi().getDbHelper().getWritableDatabase());
+        return mHelper.findAll();
+    }
+
+    @Override
+    public BaseSQLiteHelper getDB() {
+        return KApi.getApi().getDatabase();
+    }
+
+    @Override
+    public DAOHelper<Inout> getHelper() {
+        return mHelper;
+    }
+
+    @Override
+    public Inout buildUniqueById(String id) {
+        return null;
     }
 
     @Override
@@ -125,9 +142,6 @@ public class InoutDAO implements DAOHelpable<Inout> {
 
     //region删除
     protected static void deleteAll() {
-//        SQLiteDatabase sqLiteDatabase = KApi.getApi().getDbHelper().getWritableDatabase();
-//        sqLiteDatabase.delete(TABLENAME, null,null);
-//        sqLiteDatabase.close();
     }
     //endregion
 }

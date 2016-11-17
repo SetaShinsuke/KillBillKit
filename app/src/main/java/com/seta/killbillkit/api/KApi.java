@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
-import com.seta.setakits.db.DBHelper;
+import com.seta.killbillkit.api.db.Database;
+import com.seta.killbillkit.api.models.InoutContainer;
+import com.seta.killbillkit.utils.Constants;
+import com.seta.setakits.db.BaseSQLiteHelper;
 import com.seta.setakits.logs.LogX;
 
 /**
@@ -12,9 +15,13 @@ import com.seta.setakits.logs.LogX;
  */
 
 public class KApi {
+    private final static boolean DEBUGABLE = false;
+
     private static KApi api;
     private Context appContext;
-    private DBHelper dbHelper;
+    private Database mDatabase;
+
+    private static InoutContainer mInoutContainer = new InoutContainer();
 
     private KApi() {
     }
@@ -31,23 +38,26 @@ public class KApi {
         return api;
     }
 
-    public static void init(Context context, String appId, boolean offlineMode) {
+    public static void init(Context context) {
         api = getApi();
         api.appContext = context;
 
-        //初始化API(数据库)
-        api.dbHelper = new DBHelper(context);
-        //initViews(context);
         boolean isDebuggable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
         if (isDebuggable) {
             LogX.logLevel = Log.VERBOSE;
         } else {
             LogX.logLevel = Log.WARN;
         }
-        LogX.init(context);
+        LogX.init(context , Constants.LOG_FILE_NAME);
+
+        //初始化API(数据库)
+        api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
+        mInoutContainer.restore();
+
+        api.getDatabase().export();
     }
 
-    public DBHelper getDbHelper(){
-        return dbHelper;
+    public BaseSQLiteHelper getDatabase(){
+        return mDatabase;
     }
 }
