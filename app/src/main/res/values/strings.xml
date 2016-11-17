@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_exit">Exit</string>
+
+    <string name="manage_pockets">Manage Pockets</string>
+    <string name="add_pockets">Add Pockets</string>
+    <string name="remove_pockets">remove Pockets</string>
 </resources>

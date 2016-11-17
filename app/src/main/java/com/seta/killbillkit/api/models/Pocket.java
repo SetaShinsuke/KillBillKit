@@ -20,6 +20,10 @@ public class Pocket implements DBable{
 
     }
 
+    protected void save2DB(){
+        PocketDAO.getInstance().getHelper().saveOne(this);
+    }
+
     @Override
     public Long getDbId() {
         return dbId;
