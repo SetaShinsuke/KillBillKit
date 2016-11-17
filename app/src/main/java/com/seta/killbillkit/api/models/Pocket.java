@@ -16,6 +16,10 @@ public class Pocket implements DBable{
     private int AssumedRepayDay;
     private int balance = 0;
 
+    Pocket(){
+
+    }
+
     @Override
     public Long getDbId() {
         return dbId;

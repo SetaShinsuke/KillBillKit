@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.seta.killbillkit.api.db.Database;
 import com.seta.killbillkit.api.models.InoutContainer;
+import com.seta.killbillkit.api.models.PocketContainer;
 import com.seta.killbillkit.utils.Constants;
 import com.seta.setakits.db.BaseSQLiteHelper;
 import com.seta.setakits.logs.LogX;
@@ -21,7 +22,8 @@ public class KApi {
     private Context appContext;
     private Database mDatabase;
 
-    private static InoutContainer mInoutContainer = new InoutContainer();
+    private static InoutContainer sInoutContainer = new InoutContainer();
+    private static PocketContainer sPocketContainer = new PocketContainer();
 
     private KApi() {
     }
@@ -52,12 +54,22 @@ public class KApi {
 
         //初始化API(数据库)
         api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
-        mInoutContainer.restore();
+        sInoutContainer.restore();
 
         api.getDatabase().export();
     }
 
+
     public BaseSQLiteHelper getDatabase(){
         return mDatabase;
     }
+
+    public InoutContainer getInoutContainer(){
+        return sInoutContainer;
+    }
+
+    public PocketContainer getPocketContainer() {
+        return sPocketContainer;
+    }
+
 }

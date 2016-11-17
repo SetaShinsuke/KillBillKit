@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.seta.killbillkit.api.models.InoutDAO;
+import com.seta.killbillkit.api.models.PocketDAO;
 import com.seta.setakits.db.BaseSQLiteHelper;
 import com.seta.setakits.logs.LogX;
 
@@ -21,11 +22,13 @@ public class Database extends BaseSQLiteHelper {
     public void createTable(SQLiteDatabase db) {
         LogX.d("create tables . ");
         InoutDAO.createTable(db);
+        PocketDAO.createTable(db);
     }
 
     @Override
     public void updateTable(SQLiteDatabase db, int oldVersion, int newVersion) {
         LogX.d("update tables .");
         InoutDAO.updateTable(db,oldVersion,newVersion);
+        PocketDAO.updateTable(db,oldVersion,newVersion);
     }
 }

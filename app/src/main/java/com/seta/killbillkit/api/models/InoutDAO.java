@@ -88,7 +88,7 @@ public class InoutDAO implements DAOHelpable<Inout> {
 
     @Override
     public Inout buildUniqueById(String id) {
-        return null;
+        return KApi.getApi().getInoutContainer().getUniqueTFromMem(id);
     }
 
     @Override
@@ -100,8 +100,8 @@ public class InoutDAO implements DAOHelpable<Inout> {
     @Override
     public ContentValues getValues(Inout obj) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TITLE, String.valueOf(obj.getTitle()));
         values.put(COLUMN_UID, String.valueOf(obj.getTitle()));
+        values.put(COLUMN_TITLE, String.valueOf(obj.getTitle()));
         values.put(COLUMN_AMOUNT, obj.getAmount());
         values.put(COLUMN_POCKET_ID, obj.getPocketId());
         values.put(COLUMN_OTHER_INFO, obj.getOtherInfo());
@@ -125,10 +125,10 @@ public class InoutDAO implements DAOHelpable<Inout> {
                     entity.setTitle(c.getString(c.getColumnIndex(name)));
                     break;
                 case COLUMN_POCKET_ID:
-                    entity.setId(c.getString(c.getColumnIndex(name)));
+                    entity.setPocketId(c.getString(c.getColumnIndex(name)));
                     break;
                 case COLUMN_OTHER_INFO:
-                    entity.setId(c.getString(c.getColumnIndex(name)));
+                    entity.setOtherInfo(c.getString(c.getColumnIndex(name)));
                     break;
                 case COLUMN_AMOUNT:
                     entity.setAmount(c.getInt(c.getColumnIndex(name)));
