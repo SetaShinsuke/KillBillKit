@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_payment"
+        android:orderInCategory="100"
+        android:name="@string/action_settings"
+        android:title="@string/add_payment"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_income"
+        android:orderInCategory="100"
+        android:name="@string/action_settings"
+        android:title="@string/add_income"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_add_pockets"
         android:orderInCategory="100"

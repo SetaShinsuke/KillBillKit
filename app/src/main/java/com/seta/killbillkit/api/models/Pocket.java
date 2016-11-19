@@ -8,13 +8,19 @@ import com.seta.setakits.db.DBable;
  */
 
 public class Pocket implements DBable{
+
+    public String[] pocketTypes = {"card","credit_card","pay_app","cash","others"};
+
     private Long dbId;
     private String id;
     private String name;
+    private String type;
     private int billDay = 0;
     private int repayDay = 0;
     private int AssumedRepayDay;
     private int balance = 0;
+
+    private long createdAt = 0;
 
     Pocket(){
 
@@ -51,6 +57,14 @@ public class Pocket implements DBable{
         this.name = name;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    protected void setType(String type) {
+        this.type = type;
+    }
+
     public int getBillDay() {
         return billDay;
     }
@@ -81,5 +95,13 @@ public class Pocket implements DBable{
 
     protected void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    protected void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
     }
 }

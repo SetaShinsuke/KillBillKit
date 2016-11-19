@@ -19,10 +19,12 @@ public class PocketDAO implements DAOHelpable<Pocket>{
 
     private final static String COLUMN_UID = "UID";
     private final static String COLUMN_NAME = "NAME";
+    private final static String COLUMN_TYPE = "TYPE";
     private final static String COLUMN_BILL_DAY = "BILL_DAY";
     private final static String COLUMN_REPAY_DAY = "REPAY_DAY";
     private final static String COLUMN_ASSUMED_DAY = "ASSUMED_DAY";
     private final static String COLUMN_BALANCE = "BALANCE";
+    private final static String COLUMN_CREATED_AT = "CREATED_AT";
 
     private static PocketDAO sPocketDAO;
     private DAOHelper<Pocket> mHelper;
@@ -43,10 +45,12 @@ public class PocketDAO implements DAOHelpable<Pocket>{
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT " +
                 ", "+ COLUMN_UID +" TEXT  " +
                 ", "+COLUMN_NAME+" TEXT  " +
+                ", "+COLUMN_TYPE+" TEXT  " +
                 ", "+COLUMN_BILL_DAY+" INT  " +
                 ", "+COLUMN_REPAY_DAY+" INT  " +
                 ", "+COLUMN_ASSUMED_DAY+" INT  " +
                 ", "+COLUMN_BALANCE+" INT  " +
+                ", "+COLUMN_CREATED_AT+" LONG  " +
                 " );";
         database.execSQL(sql);
     }
@@ -78,6 +82,9 @@ public class PocketDAO implements DAOHelpable<Pocket>{
                 case COLUMN_NAME:
                     entity.setName(c.getString(c.getColumnIndex(name)));
                     break;
+                case COLUMN_TYPE:
+                    entity.setType(c.getString(c.getColumnIndex(name)));
+                    break;
                 case COLUMN_BILL_DAY:
                     entity.setBillDay(c.getInt(c.getColumnIndex(name)));
                     break;
@@ -90,6 +97,9 @@ public class PocketDAO implements DAOHelpable<Pocket>{
                 case COLUMN_BALANCE:
                     entity.setBalance(c.getInt(c.getColumnIndex(name)));
                     break;
+                case COLUMN_CREATED_AT:
+                    entity.setCreatedAt(c.getLong(c.getColumnIndex(name)));
+                    break;
                 default:
                     LogX.e("unknown filed " + name);
             }
@@ -101,10 +111,12 @@ public class PocketDAO implements DAOHelpable<Pocket>{
         ContentValues values = new ContentValues();
         values.put(COLUMN_UID, String.valueOf(obj.getId()));
         values.put(COLUMN_NAME, String.valueOf(obj.getName()));
+        values.put(COLUMN_TYPE, String.valueOf(obj.getType()));
         values.put(COLUMN_BILL_DAY, obj.getBillDay());
         values.put(COLUMN_REPAY_DAY, obj.getRepayDay());
         values.put(COLUMN_ASSUMED_DAY, obj.getAssumedRepayDay());
         values.put(COLUMN_BALANCE, obj.getBalance());
+        values.put(COLUMN_CREATED_AT, obj.getCreatedAt());
         return values;
     }
 

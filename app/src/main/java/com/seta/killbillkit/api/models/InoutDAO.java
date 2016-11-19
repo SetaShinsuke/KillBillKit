@@ -25,6 +25,7 @@ public class InoutDAO implements DAOHelpable<Inout> {
     private final static String COLUMN_POCKET_ID = "POCKET_ID";
     private final static String COLUMN_OTHER_INFO = "OTHER_INFO";
     private final static String COLUMN_AMOUNT = "AMOUNT";
+    private final static String COLUMN_CREATED_AT = "CREATED_AT";
 
     private static InoutDAO sInoutDAO;
     private DAOHelper<Inout> mHelper;
@@ -48,6 +49,7 @@ public class InoutDAO implements DAOHelpable<Inout> {
                 ", "+COLUMN_AMOUNT+" INT  " +
                 ", "+COLUMN_POCKET_ID+" TEXT  " +
                 ", "+COLUMN_OTHER_INFO+" TEXT  " +
+                ", "+COLUMN_CREATED_AT+" LONG  " +
                 " );";
         database.execSQL(sql);
     }
@@ -105,6 +107,7 @@ public class InoutDAO implements DAOHelpable<Inout> {
         values.put(COLUMN_AMOUNT, obj.getAmount());
         values.put(COLUMN_POCKET_ID, obj.getPocketId());
         values.put(COLUMN_OTHER_INFO, obj.getOtherInfo());
+        values.put(COLUMN_CREATED_AT, obj.getCreatedAt());
         return values;
     }
 
@@ -132,6 +135,9 @@ public class InoutDAO implements DAOHelpable<Inout> {
                     break;
                 case COLUMN_AMOUNT:
                     entity.setAmount(c.getInt(c.getColumnIndex(name)));
+                    break;
+                case COLUMN_CREATED_AT:
+                    entity.setCreatedAt(c.getLong(c.getColumnIndex(name)));
                     break;
                 default:
                     LogX.e("unknown filed " + name);

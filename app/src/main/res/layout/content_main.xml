@@ -14,7 +14,9 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
+        android:id="@+id/total_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        tools:text="Hello World!"
+        />
 </RelativeLayout>

@@ -9,5 +9,10 @@
 
     <string name="manage_pockets">Manage Pockets</string>
     <string name="add_pockets">Add Pockets</string>
-    <string name="remove_pockets">remove Pockets</string>
+    <string name="remove_pockets">Remove Pockets</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="add_income">Add Income</string>
+
+    <string name="total_balance">Total Balance : </string>
+    <string name="total_balance_real">Real Balance : </string>
 </resources>
