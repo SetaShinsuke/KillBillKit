@@ -19,4 +19,23 @@
         android:layout_height="wrap_content"
         tools:text="Hello World!"
         />
+
+    <TextView
+        android:id="@+id/all_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/total_account"
+        android:layout_marginTop="50dp"
+        android:text="@string/all_inouts"
+        />
+
+    <TextView
+        android:id="@+id/inouts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/all_title"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        tools:text="@string/all_inouts"
+        />
 </RelativeLayout>

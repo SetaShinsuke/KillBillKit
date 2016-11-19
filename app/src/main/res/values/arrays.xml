@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pockets_demo">
+        <item>Pocket_1</item>
+        <item>Pocket_2</item>
+        <item>Pocket_3</item>
+        <item>Pocket_4</item>
+        <item>Pocket_5</item>
+    </array>
+</resources>

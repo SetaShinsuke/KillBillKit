@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,14 +19,15 @@ import com.seta.killbillkit.R;
 import com.seta.killbillkit.api.KApi;
 import com.seta.killbillkit.api.models.User;
 import com.seta.killbillkit.presenters.MainPresenter;
-import com.seta.killbillkit.views.Mainview;
+import com.seta.killbillkit.views.dialogs.CreateInoutDialog;
+import com.seta.killbillkit.viewsInterfaces.MainView;
 import com.seta.setakits.logs.LogX;
 
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity
-        implements Mainview , NavigationView.OnNavigationItemSelectedListener {
+        implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
     private MainPresenter mMainPresenter;
     private User mUser;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView mNavigationView;
     private FloatingActionButton mFab;
     private TextView mTotalTextView;
+    private DialogFragment mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +78,30 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void RefreshTotalText(String amountString) {
+    public void refreshTotalText(String amountString) {
         mTotalTextView.setText(amountString);
     }
 
     @Override
+    public void refreshInoutsAll(String allInouts) {
+        ((TextView)findViewById(R.id.inouts)).setText(allInouts);
+    }
+
+    @Override
     public void refreshFab(boolean showBoth) {
+        FloatingActionButton.OnVisibilityChangedListener listener = new FloatingActionButton.OnVisibilityChangedListener() {
+            @Override
+            public void onShown(FloatingActionButton fab) {
+                super.onShown(fab);
+            }
+
+            @Override
+            public void onHidden(FloatingActionButton fab) {
+                super.onHidden(fab);
+                fab.show();
+            }
+        };
+        mFab.hide(listener);
         if(showBoth){
             mFab.setImageResource(R.drawable.ic_sentiment_neutral_white_48dp);
             mFab.setBackgroundResource(R.color.colorPrimary);
@@ -93,11 +114,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void refreshNavPocketMenu(ArrayList<String> titles) {
         Menu navMenu = mNavigationView.getMenu();
-        int groupId = R.id.pocket_list_menu;
+        int groupId = R.id.pocket_menu_group;
         Menu pocketListMenu = navMenu.getItem(0).getSubMenu();
         pocketListMenu.clear();
         for(int i=0;i<titles.size();i++){
-            navMenu.add(groupId,i,i,titles.get(i));
+            pocketListMenu.add(groupId,i,i,titles.get(i));
         }
     }
 
@@ -125,8 +146,27 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(item.getGroupId()==R.id.pocket_menu_group){
+            mMainPresenter.onPocketMenuItemClick(item.getOrder());
+            return true;
+        }
+
         //TODO:添加/移除 pocket
-        if (id == R.id.action_add_pockets) {
+        if(id == R.id.action_add_payment){
+            CreateInoutDialog dialog = new CreateInoutDialog();
+            mDialog = dialog;
+            dialog.setType(true);
+            dialog.show(this);
+            return true;
+        }else if(id == R.id.action_add_income) {
+            CreateInoutDialog dialog = new CreateInoutDialog();
+            mDialog = dialog;
+            dialog.setType(false);
+            dialog.show(this);
+            return true;
+        }else if(id==R.id.action_add_budget) {
+            return true;
+        }else if (id == R.id.action_add_pockets) {
             return true;
         }else if(id==R.id.action_remove_pockets){
             return true;
@@ -134,6 +174,8 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

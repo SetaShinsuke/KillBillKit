@@ -16,6 +16,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         KApi.init(this);
+        initCrashHandelr();
     }
 
     private void initCrashHandelr(){

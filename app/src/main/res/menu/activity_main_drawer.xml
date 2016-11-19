@@ -3,9 +3,9 @@
 
     <item
         android:title="Pockets">
-        <menu
-            android:id="@+id/pocket_list_menu">
+        <menu >
             <group
+                android:id="@+id/pocket_menu_group"
                 android:checkableBehavior="single">
                 <!--<item-->
                 <!--android:id="@+id/nav_camera"-->

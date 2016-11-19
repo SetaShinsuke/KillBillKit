@@ -61,6 +61,8 @@ public class KApi {
         //初始化API(数据库)
         api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
         sInoutContainer.restore();
+        api.getUser().restore();
+        api.getUser().restorePockets();
 
         api.getDatabase().export();
     }
@@ -84,5 +86,9 @@ public class KApi {
 
     public void setUser(User user) {
         mUser = user;
+    }
+
+    public Context getAppContext() {
+        return appContext;
     }
 }
