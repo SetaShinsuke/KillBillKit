@@ -1,6 +1,6 @@
 package com.seta.killbillkit.activities;
 
-import android.databinding.DataBindingUtil;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -8,7 +8,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.seta.killbillkit.R;
-import com.seta.killbillkit.api.KApi;
-import com.seta.killbillkit.api.models.User;
+import com.seta.killbillkit.framework.BaseActivity;
 import com.seta.killbillkit.presenters.MainPresenter;
 import com.seta.killbillkit.views.dialogs.CreateInoutDialog;
 import com.seta.killbillkit.viewsInterfaces.MainView;
@@ -26,11 +24,10 @@ import com.seta.setakits.logs.LogX;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements MainView, NavigationView.OnNavigationItemSelectedListener {
 
     private MainPresenter mMainPresenter;
-    private User mUser;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DataBindingUtil.setContentView(this,R.layout.activity_main);
+        setSwipeBackEnable(false);
         initViews();
         initData();
     }
@@ -72,8 +69,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initData(){
-        this.mUser = KApi.getApi().getUser();
-        this.mMainPresenter = new MainPresenter(this, mUser);
+        this.mMainPresenter = new MainPresenter(this);
         this.mMainPresenter.init();
     }
 
@@ -167,6 +163,8 @@ public class MainActivity extends AppCompatActivity
         }else if(id==R.id.action_add_budget) {
             return true;
         }else if (id == R.id.action_add_pockets) {
+            Intent intent = new Intent(this,EditPocketActivity.class);
+            startActivity(intent);
             return true;
         }else if(id==R.id.action_remove_pockets){
             return true;

@@ -8,12 +8,8 @@
     >
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_item_margin"
+        style="@style/spinner_title"
         android:text="Select Pocket"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
         />
 
     <Spinner

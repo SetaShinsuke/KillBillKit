@@ -10,25 +10,34 @@ import com.seta.setakits.db.DBable;
 public class Pocket implements DBable{
 
     public static final String TYPE_UNSPECIFIED = "unspecified";
-    public static final String TYPE_CASH = "cash";
-    public static final String TYPE_CARD = "card";
+    public static final String TYPE_CASH        = "cash";
+    public static final String TYPE_CARD        = "card";
     public static final String TYPE_CREDIT_CARD = "credit_card";
-    public static final String TYPE_PAY_APP = "pay_app";
-    public static final String TYPE_OTHERS = "others";
+    public static final String TYPE_PAY_APP     = "pay_app";
+    public static final String TYPE_OTHERS      = "others";
 
     private Long dbId;
     private String id;
     private String name;
     private String type;
-    private int billDay = 0;
-    private int repayDay = 0;
-    private int AssumedRepayDay;
+    private int billDay = -1;
+    private int repayDay = -1;
+    private int AssumedRepayDay = -1;
     private int balance = 0;
 
     private long createdAt = 0;
 
     Pocket(){
 
+    }
+
+    public int calculateBalance(){
+        //默认当前 年月日
+        return this.calculateBalance(0,0,0);
+    }
+
+    public int calculateBalance(int year , int month , int day){
+        return getBalance();
     }
 
     protected void save2DB(){

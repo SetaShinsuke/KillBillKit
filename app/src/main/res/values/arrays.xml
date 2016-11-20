@@ -7,4 +7,11 @@
         <item>Pocket_4</item>
         <item>Pocket_5</item>
     </array>
+
+    <array name="pocket_types">
+        <item>@string/type_unspecified</item>
+        <item>@string/type_credit</item>
+        <item>@string/type_loan</item>
+        <item>@string/type_emergency</item>
+    </array>
 </resources>

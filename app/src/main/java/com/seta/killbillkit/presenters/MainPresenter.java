@@ -23,12 +23,12 @@ public class MainPresenter {
 
     private boolean showingReal = true;
 
-    public MainPresenter(MainView mainview, User user){
+    public MainPresenter(MainView mainview){
         this.mainview = mainview;
-        this.mUser = user;
     }
 
     public void init(){
+        this.mUser = KApi.getApi().getUser();
         showingReal = true;
         mainview.refreshTotalText( getResString(R.string.total_balance_real) + mUser.getRealAccount());
         mainview.refreshFab(showingReal);
