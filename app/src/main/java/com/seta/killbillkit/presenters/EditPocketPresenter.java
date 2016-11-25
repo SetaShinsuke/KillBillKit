@@ -16,4 +16,8 @@ public class EditPocketPresenter {
     public void init(){
 
     }
+
+    public void commitPocketData(){
+        
+    }
 }

@@ -9,12 +9,12 @@ import com.seta.setakits.db.DBable;
 
 public class Pocket implements DBable{
 
-    public static final String TYPE_UNSPECIFIED = "unspecified";
-    public static final String TYPE_CASH        = "cash";
-    public static final String TYPE_CARD        = "card";
-    public static final String TYPE_CREDIT_CARD = "credit_card";
-    public static final String TYPE_PAY_APP     = "pay_app";
-    public static final String TYPE_OTHERS      = "others";
+//    public static final String TYPE_UNSPECIFIED = "unspecified";
+//    public static final String TYPE_CASH        = "cash";
+//    public static final String TYPE_CARD        = "card";
+//    public static final String TYPE_CREDIT_CARD = "credit_card";
+//    public static final String TYPE_PAY_APP     = "pay_app";
+//    public static final String TYPE_OTHERS      = "others";
 
     private Long dbId;
     private String id;

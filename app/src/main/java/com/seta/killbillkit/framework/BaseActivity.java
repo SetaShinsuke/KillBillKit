@@ -3,6 +3,7 @@ package com.seta.killbillkit.framework;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -28,6 +29,14 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
 
     public Context getContext(){
         return this;
+    }
+
+    public void enableActionbarBack(){
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

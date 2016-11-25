@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_exit">Exit</string>
+    <string name="action_commit">Commit</string>
 
     <string name="all_inouts">App payments and incomes : </string>
 
@@ -30,8 +31,10 @@
     <!-- 创建pocket -->
     <string name="pocket_name_hint">Pocket Name</string>
     <string name="pocket_balance_hint">Pocket Balance</string>
+    <string name="pocket_bill_day">Bill Day</string>
+    <string name="pocket_repay_day">Repayment Day</string>
 
-    <!-- pocket types -->
+    <!-- Pocket Types -->
     <string name="type_unspecified">Unspecified</string>
     <string name="type_credit">Credit</string>
     <string name="type_loan">Loan</string>

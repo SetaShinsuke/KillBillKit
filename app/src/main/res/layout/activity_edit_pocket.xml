@@ -27,12 +27,23 @@
         </android.support.design.widget.AppBarLayout>
 
 
+        <TextView
+            style="@style/spinner_title"
+            android:text="@string/pocket_type_hint"
+            />
+        <Spinner
+            android:id="@+id/type_spinner"
+            style="@style/spinner"
+            tools:listitem="@array/pocket_types"
+            />
+
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/pocket_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/pocket_name_hint"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/main_margin"
             >
 
             <android.support.design.widget.TextInputEditText
@@ -54,17 +65,47 @@
             </android.support.design.widget.TextInputEditText>
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            style="@style/spinner_title"
-            android:text="@string/pocket_type_hint"
-            />
-
-        <Spinner
-            android:id="@+id/type_spinner"
-            android:layout_width="200dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/main_margin"
-            tools:listitem="@array/pocket_types"
-            />
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    style="@style/spinner_title"
+                    android:text="@string/pocket_bill_day"
+                    />
+                <Spinner
+                    android:id="@+id/bill_day_spinner"
+                    style="@style/spinner"
+                    android:layout_width="match_parent"
+                    tools:listitem="@array/pocket_types"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+                <TextView
+                    style="@style/spinner_title"
+                    android:text="@string/pocket_repay_day"
+                    />
+                <Spinner
+                    android:id="@+id/repay_day_spinner"
+                    style="@style/spinner"
+                    android:layout_width="match_parent"
+                    tools:listitem="@array/pocket_types"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

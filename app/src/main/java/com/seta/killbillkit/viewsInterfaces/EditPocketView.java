@@ -5,4 +5,10 @@ package com.seta.killbillkit.viewsInterfaces;
  */
 
 public interface EditPocketView {
+    String getPocketTypeEditing();
+    String getNameEditing();
+    int getBalanceEditing();
+    int getBillDayEditing();
+    int getRepaymentDayEditing();
+
 }

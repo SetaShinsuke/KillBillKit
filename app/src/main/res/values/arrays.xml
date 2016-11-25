@@ -14,4 +14,5 @@
         <item>@string/type_loan</item>
         <item>@string/type_emergency</item>
     </array>
+
 </resources>

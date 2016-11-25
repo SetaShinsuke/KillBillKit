@@ -16,4 +16,8 @@ public class PocketContainer extends BaseContainer<Pocket> {
     public PocketContainer(DAOHelpable<Pocket> daoHelpable) {
         super(daoHelpable);
     }
+
+//    public Pocket getTmpPocket(){
+//        return getUniqueTFromMem("tmp_pocket");
+//    }
 }
