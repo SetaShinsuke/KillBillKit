@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.EditPocketActivity"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/pocket_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pocket_name_hint"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                style="@style/inout_create_edit_text"
+                >
+            </android.support.design.widget.TextInputEditText>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/pocket_balance_hint"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                style="@style/inout_create_edit_text.balance"
+                >
+            </android.support.design.widget.TextInputEditText>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            style="@style/spinner_title"
+            android:text="@string/pocket_type_hint"
+            />
+
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_margin"
+            tools:listitem="@array/pocket_types"
+            />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

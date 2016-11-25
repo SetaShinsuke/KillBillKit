@@ -14,6 +14,7 @@ public class Inout implements DBable{
     private int amount;
     private String pocketId;
     private String otherInfo;
+    private long createdAt = 0;
 
     private boolean isAssumed = false;
 
@@ -74,5 +75,13 @@ public class Inout implements DBable{
 
     protected void setAssumed(boolean assumed) {
         isAssumed = assumed;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
     }
 }

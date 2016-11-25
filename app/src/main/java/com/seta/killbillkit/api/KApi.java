@@ -7,7 +7,9 @@ import android.util.Log;
 import com.seta.killbillkit.api.db.Database;
 import com.seta.killbillkit.api.models.InoutContainer;
 import com.seta.killbillkit.api.models.PocketContainer;
+import com.seta.killbillkit.api.models.User;
 import com.seta.killbillkit.utils.Constants;
+import com.seta.setakits.SetaUtils;
 import com.seta.setakits.db.BaseSQLiteHelper;
 import com.seta.setakits.logs.LogX;
 
@@ -21,6 +23,8 @@ public class KApi {
     private static KApi api;
     private Context appContext;
     private Database mDatabase;
+
+    private User mUser;
 
     private static InoutContainer sInoutContainer = new InoutContainer();
     private static PocketContainer sPocketContainer = new PocketContainer();
@@ -36,6 +40,7 @@ public class KApi {
     public static KApi getApi() {
         if (api == null) {
             api = new KApi();
+            api.setUser(new User());
         }
         return api;
     }
@@ -43,6 +48,7 @@ public class KApi {
     public static void init(Context context) {
         api = getApi();
         api.appContext = context;
+        SetaUtils.init(context);
 
         boolean isDebuggable = (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
         if (isDebuggable) {
@@ -55,6 +61,8 @@ public class KApi {
         //初始化API(数据库)
         api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
         sInoutContainer.restore();
+        api.getUser().restore();
+        api.getUser().restorePockets();
 
         api.getDatabase().export();
     }
@@ -72,4 +80,15 @@ public class KApi {
         return sPocketContainer;
     }
 
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setUser(User user) {
+        mUser = user;
+    }
+
+    public Context getAppContext() {
+        return appContext;
+    }
 }

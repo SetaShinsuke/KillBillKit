@@ -13,8 +13,43 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="BasicAppTheme" parent="AppTheme.NoActionBar">
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <style name="BasicAppTheme.Swipable" parent="BasicAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="inout_create_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_margin">@dimen/dialog_item_margin</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColorHint">#888888</item>
+    </style>
+
+    <style name="inout_create_edit_text.amount">
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">8</item>
+    </style>
+    <!--余额：可为负数 -->
+    <style name="inout_create_edit_text.balance">
+        <item name="android:inputType">numberSigned</item>
+        <item name="android:maxLength">8</item>
+    </style>
+
+    <style name="spinner_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/dialog_item_margin</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
 </resources>
