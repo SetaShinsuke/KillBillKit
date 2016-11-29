@@ -54,11 +54,11 @@ public class User {
         mPockets = pockets;
     }
 
-    public void addPocket(String pocketName){
-        addPocket(pocketName,0);
+    public Pocket addPocket(String pocketName){
+        return addPocket(pocketName,0);
     }
 
-    public void addPocket(String pocketName , int balance){
+    public Pocket addPocket(String pocketName , int balance){
         String pocketId = pocketName + System.currentTimeMillis();
         Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
         pocket.setName(pocketName);
@@ -69,6 +69,7 @@ public class User {
             //TODO:保存到数据库
 //            pocket.save2DB();
         }
+        return pocket;
     }
 
     public void removePocket(){

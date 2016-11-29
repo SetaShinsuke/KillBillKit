@@ -9,6 +9,13 @@ import com.seta.setakits.db.DBable;
 
 public class Pocket implements DBable{
 
+    public static final String TYPE_UNSPECIFIED = "Unspecified";
+    public static final String TYPE_CREDIT = "Credit";
+    public static final String TYPE_LOAN = "Loan";
+    public static final String TYPE_EMERGENCEY = "Emergency";
+
+    public static final String[] pocketTypes = {TYPE_UNSPECIFIED,TYPE_CREDIT,TYPE_LOAN,TYPE_EMERGENCEY};
+
 //    public static final String TYPE_UNSPECIFIED = "unspecified";
 //    public static final String TYPE_CASH        = "cash";
 //    public static final String TYPE_CARD        = "card";
@@ -40,7 +47,7 @@ public class Pocket implements DBable{
         return getBalance();
     }
 
-    protected void save2DB(){
+    public void save2DB(){
         PocketDAO.getInstance().getHelper().saveOne(this);
     }
 
@@ -67,7 +74,7 @@ public class Pocket implements DBable{
         return name;
     }
 
-    protected void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -75,7 +82,7 @@ public class Pocket implements DBable{
         return type;
     }
 
-    protected void setType(String type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -83,7 +90,7 @@ public class Pocket implements DBable{
         return billDay;
     }
 
-    protected void setBillDay(int billDay) {
+    public void setBillDay(int billDay) {
         this.billDay = billDay;
     }
 
@@ -91,7 +98,7 @@ public class Pocket implements DBable{
         return repayDay;
     }
 
-    protected void setRepayDay(int repayDay) {
+    public void setRepayDay(int repayDay) {
         this.repayDay = repayDay;
     }
 
@@ -99,7 +106,7 @@ public class Pocket implements DBable{
         return AssumedRepayDay;
     }
 
-    protected void setAssumedRepayDay(int assumedRepayDay) {
+    public void setAssumedRepayDay(int assumedRepayDay) {
         AssumedRepayDay = assumedRepayDay;
     }
 
@@ -107,7 +114,7 @@ public class Pocket implements DBable{
         return balance;
     }
 
-    protected void setBalance(int balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -115,7 +122,7 @@ public class Pocket implements DBable{
         return createdAt;
     }
 
-    protected void setCreatedAt(long createdAt) {
+    public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
     }
 }

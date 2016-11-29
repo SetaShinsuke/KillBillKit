@@ -11,4 +11,6 @@ public interface EditPocketView {
     int getBillDayEditing();
     int getRepaymentDayEditing();
 
+    void onCommitSuccess();
+    void onCommitFail();
 }

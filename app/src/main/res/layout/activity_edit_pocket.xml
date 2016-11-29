@@ -34,7 +34,6 @@
         <Spinner
             android:id="@+id/type_spinner"
             style="@style/spinner"
-            tools:listitem="@array/pocket_types"
             />
 
 
@@ -71,6 +70,7 @@
             android:orientation="horizontal"
             >
             <LinearLayout
+                android:id="@+id/bill_day_spinner_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -84,10 +84,10 @@
                     android:id="@+id/bill_day_spinner"
                     style="@style/spinner"
                     android:layout_width="match_parent"
-                    tools:listitem="@array/pocket_types"
                     />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/repay_day_spinner_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -101,7 +101,6 @@
                     android:id="@+id/repay_day_spinner"
                     style="@style/spinner"
                     android:layout_width="match_parent"
-                    tools:listitem="@array/pocket_types"
                     />
             </LinearLayout>
         </LinearLayout>
