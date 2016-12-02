@@ -67,13 +67,12 @@ public class CreateInoutDialog extends BaseDialogFragment {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                final Button button = ((AlertDialog)getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setClickable(isValid());
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                final Button button = ((AlertDialog)getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
+                button.setClickable(isValid());
             }
 
             @Override
@@ -122,7 +121,7 @@ public class CreateInoutDialog extends BaseDialogFragment {
                         if(mType.equals(TYPE_OUT)){ //支出
                             amount = 0-amount;
                         }
-                        LogX.fastLog("新建Inout name : " + name + "\nAmount : " + amount + "\nPocket name : " + getSelectedPocket().getName());
+                        LogX.fastLog("新建Inout name : " + name + "\nAmount : " + amount + "\nPocket id : " + getSelectedPocket().getId());
                         KApi.getApi().getUser().addInout(name,amount,getSelectedPocket().getId());
                     }
                 })
@@ -147,7 +146,6 @@ public class CreateInoutDialog extends BaseDialogFragment {
                 || editableName.length() == 0 || editableAmount.length() == 0) {
             flag = false;
         }
-        LogX.fastLog("is valid : " + flag);
         return flag;
     }
 

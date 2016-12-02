@@ -33,7 +33,8 @@ public class Inout implements DBable{
         return id;
     }
 
-    protected void setId(String id) {
+    @Override
+    public void setId(String id) {
         this.id = id;
     }
 

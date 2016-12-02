@@ -1,6 +1,7 @@
 package com.seta.killbillkit.api.models;
 
 import com.seta.setakits.db.DBable;
+import com.seta.setakits.logs.LogX;
 
 /**
  * Created by SETA_WORK on 2016/11/15.
@@ -26,7 +27,7 @@ public class Pocket implements DBable{
     private Long dbId;
     private String id;
     private String name;
-    private String type;
+    private String type = TYPE_UNSPECIFIED;
     private int billDay = -1;
     private int repayDay = -1;
     private int AssumedRepayDay = -1;
@@ -66,6 +67,7 @@ public class Pocket implements DBable{
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }
@@ -115,6 +117,7 @@ public class Pocket implements DBable{
     }
 
     public int putBalance(int amount){
+        LogX.d("put balance : " + amount);
         balance += amount;
         return balance;
     }

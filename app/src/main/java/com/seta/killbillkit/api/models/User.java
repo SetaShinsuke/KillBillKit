@@ -33,10 +33,10 @@ public class User {
         lastSettleTime = System.currentTimeMillis();
     }
 
-    public void restorePockets(Context context){
+    public void restorePockets(){
         mPockets.clear();
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCE_TAG,Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = KApi.getApi().getAppContext().getSharedPreferences(SHARED_PREFERENCE_TAG,Context.MODE_PRIVATE);
         String mPocketIdString = sharedPreferences.getString(USER_POCKET_IDS,"");
         ArrayList<String> pocketIds = new ArrayList<>(Arrays.asList(mPocketIdString.split(",")));
         while(pocketIds.size()>0 && pocketIds.get(pocketIds.size()-1).length()==0){
@@ -83,6 +83,18 @@ public class User {
         return addPocket(pocketName,0);
     }
 
+    private void updatePockets(){
+        StringBuilder sb = new StringBuilder();
+        for(Pocket pocket : mPockets){
+            sb.append(pocket.getId());
+            sb.append(",");
+        }
+        SharedPreferences sharedPreferences = KApi.getApi().getAppContext().getSharedPreferences(SHARED_PREFERENCE_TAG,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(USER_POCKET_IDS,sb.toString());
+        editor.apply();
+    }
+
     public Pocket addPocket(String pocketName , int balance){
         String pocketId = pocketName + System.currentTimeMillis();
         Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
@@ -94,6 +106,7 @@ public class User {
             //TODO:保存到数据库
         }
         pocket.save2DB();
+        updatePockets();
         return pocket;
     }
 

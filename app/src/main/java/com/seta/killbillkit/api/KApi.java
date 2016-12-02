@@ -63,7 +63,7 @@ public class KApi {
         sInoutContainer.restore();
         sPocketContainer.restore();
         api.getUser().restore();
-        api.getUser().restorePockets(api.getAppContext());
+        api.getUser().restorePockets();
 
         api.getDatabase().export();
     }
