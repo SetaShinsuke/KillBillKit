@@ -31,8 +31,8 @@ import static com.seta.killbillkit.utils.ResUtils.getStringRes;
 public class CreateInoutDialog extends BaseDialogFragment {
 
     private static final String TYPE = "type";
-    private static final String TYPE_IN = "type_in";
-    private static final String TYPE_OUT = "type_out";
+    private static final String TYPE_IN = "type_in"; //收入
+    private static final String TYPE_OUT = "type_out"; //支出
 
     private View mainView;
     private TextInputLayout nameInputLayout,amountInputLayou;
@@ -44,6 +44,9 @@ public class CreateInoutDialog extends BaseDialogFragment {
         super.setArguments(args);
     }
 
+    /**
+     * 是否是支出
+     */
     public void setType(boolean isPayment) {
 //        Bundle bundle = getArguments();
 //        if (bundle == null) {
@@ -116,7 +119,7 @@ public class CreateInoutDialog extends BaseDialogFragment {
                         }
                         String name = editableName.toString();
                         int amount = Integer.parseInt(editableAmount.toString());
-                        if(mType.equals(TYPE_OUT)){
+                        if(mType.equals(TYPE_OUT)){ //支出
                             amount = 0-amount;
                         }
                         LogX.fastLog("新建Inout name : " + name + "\nAmount : " + amount + "\nPocket name : " + getSelectedPocket().getName());

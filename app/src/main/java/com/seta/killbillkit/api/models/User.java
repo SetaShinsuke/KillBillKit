@@ -1,8 +1,16 @@
 package com.seta.killbillkit.api.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.seta.killbillkit.api.KApi;
+import com.seta.killbillkit.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import static com.seta.killbillkit.utils.Constants.SHARED_PREFERENCE_TAG;
+import static com.seta.killbillkit.utils.Constants.USER_POCKET_IDS;
 
 /**
  * Created by SETA_WORK on 2016/11/17.
@@ -25,16 +33,33 @@ public class User {
         lastSettleTime = System.currentTimeMillis();
     }
 
-    public void restorePockets(){
+    public void restorePockets(Context context){
         mPockets.clear();
-        addPocket("Default");
-        addPocket("余额宝");
-        addPocket("支付宝");
-        addPocket("现金");
-        addPocket("招行银行卡",371);
-        addPocket("招行信用卡",0);
-        addPocket("QQ钱包");
-        addPocket("微信钱包");
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCE_TAG,Context.MODE_PRIVATE);
+        String mPocketIdString = sharedPreferences.getString(USER_POCKET_IDS,"");
+        ArrayList<String> pocketIds = new ArrayList<>(Arrays.asList(mPocketIdString.split(",")));
+        while(pocketIds.size()>0 && pocketIds.get(pocketIds.size()-1).length()==0){
+            pocketIds.remove(pocketIds.size()-1);
+        }
+        for(String id: pocketIds){
+            Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(id);
+            mPockets.add(pocket);
+        }
+        //初次使用，创建默认Pocket
+        if(mPockets.size()==0){
+            //会保存数据库
+            addPocket(Constants.DEFAULT_POCKET_NAME);
+        }
+
+//        addPocket("Default");
+//        addPocket("余额宝");
+//        addPocket("支付宝");
+//        addPocket("现金");
+//        addPocket("招行银行卡",371);
+//        addPocket("招行信用卡",0);
+//        addPocket("QQ钱包");
+//        addPocket("微信钱包");
 //        addPocket("现金");
     }
 
@@ -67,8 +92,8 @@ public class User {
             mPockets.add(pocket);
             pocket.setCreatedAt(System.currentTimeMillis());
             //TODO:保存到数据库
-//            pocket.save2DB();
         }
+        pocket.save2DB();
         return pocket;
     }
 
@@ -85,10 +110,14 @@ public class User {
         return allProperties;
     }
 
+    //负债（欠钱时为正值...）
     public int getDebt(){
         int debt = 0;
         for(Inout inout:mInouts){
-            debt += inout.getAmount();
+            Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(inout.getPocketId());
+            if(pocket.getType().equals(Pocket.TYPE_CREDIT)){ //超前消费，增加负债
+                debt += inout.getAmount();
+            }
         }
         return -debt;
     }
@@ -100,6 +129,7 @@ public class User {
     }
 
     public void addInout(String title , int amount , String pocketId){
+        //添加Inout
         String id = title + System.currentTimeMillis();
         Inout inout = KApi.getApi().getInoutContainer().getUniqueTFromMem(id);
         inout.setTitle(title);
@@ -107,6 +137,14 @@ public class User {
         inout.setPocketId(pocketId);
         inout.setCreatedAt(System.currentTimeMillis());
         this.mInouts.add(inout);
+        KApi.getApi().getInoutContainer().updateTs2DB(inout);
+
+        //更新Pocket余额
+        Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
+        if( !pocket.getType().equals(Pocket.TYPE_CREDIT )){ //不是信用消费，直接扣除
+            pocket.putBalance(amount);
+            pocket.save2DB();
+        }
     }
 
     public ArrayList<Inout> getInouts() {
@@ -115,5 +153,6 @@ public class User {
 
     public void setInouts(ArrayList<Inout> inouts) {
         mInouts = inouts;
+        KApi.getApi().getInoutContainer().updateAll(inouts);
     }
 }

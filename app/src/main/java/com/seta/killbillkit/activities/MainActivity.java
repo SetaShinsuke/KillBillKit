@@ -21,9 +21,10 @@ import com.seta.killbillkit.presenters.MainPresenter;
 import com.seta.killbillkit.views.dialogs.CreateInoutDialog;
 import com.seta.killbillkit.viewsInterfaces.MainView;
 import com.seta.setakits.logs.LogX;
-import static com.seta.setakits.logs.LogX.fastLog;
 
 import java.util.ArrayList;
+
+import static com.seta.setakits.logs.LogX.fastLog;
 
 
 public class MainActivity extends BaseActivity
@@ -152,7 +153,7 @@ public class MainActivity extends BaseActivity
         }
 
         //TODO:添加/移除 pocket
-        if(id == R.id.action_add_payment){
+        if(id == R.id.action_add_payment){ //支出
             CreateInoutDialog dialog = new CreateInoutDialog();
             mDialog = dialog;
             dialog.setType(true);

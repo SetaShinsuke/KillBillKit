@@ -114,6 +114,11 @@ public class Pocket implements DBable{
         return balance;
     }
 
+    public int putBalance(int amount){
+        balance += amount;
+        return balance;
+    }
+
     public void setBalance(int balance) {
         this.balance = balance;
     }
