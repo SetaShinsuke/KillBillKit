@@ -1,4 +1,4 @@
-package com.seta.killbillkit.viewsInterfaces;
+package com.seta.killbillkit.mvpViews;
 
 /**
  * Created by Seta.Driver on 2016/11/20.

@@ -17,8 +17,11 @@ import android.widget.Toast;
 import com.seta.killbillkit.R;
 import com.seta.killbillkit.api.KApi;
 import com.seta.killbillkit.api.models.Pocket;
+import com.seta.killbillkit.events.InoutEvent;
 import com.seta.setakits.logs.LogX;
 import com.seta.setakits.views.BaseDialogFragment;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -90,7 +93,9 @@ public class CreateInoutDialog extends BaseDialogFragment {
             pocketNames[i] = pockets.get(i).getName();
         }
         // 建立Adapter并且绑定数据源
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext(), android.R.layout.simple_spinner_dropdown_item, pocketNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mainView.getContext()
+                , android.R.layout.simple_spinner_dropdown_item
+                , pocketNames);
         //绑定 Adapter到控件
         mPocketSpinner.setAdapter(adapter);
 
@@ -123,6 +128,7 @@ public class CreateInoutDialog extends BaseDialogFragment {
                         }
                         LogX.fastLog("新建Inout name : " + name + "\nAmount : " + amount + "\nPocket id : " + getSelectedPocket().getId());
                         KApi.getApi().getUser().addInout(name,amount,getSelectedPocket().getId());
+                        EventBus.getDefault().post(new InoutEvent());
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -3,7 +3,10 @@ package com.seta.killbillkit.presenters;
 import com.seta.killbillkit.api.KApi;
 import com.seta.killbillkit.api.models.Pocket;
 import com.seta.killbillkit.api.models.User;
-import com.seta.killbillkit.viewsInterfaces.EditPocketView;
+import com.seta.killbillkit.events.PocketEditEvent;
+import com.seta.killbillkit.mvpViews.EditPocketView;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Seta.Driver on 2016/11/20.
@@ -39,7 +42,7 @@ public class EditPocketPresenter {
 
         //TODO:更新数据库
 //        mPocket.save2DB();
-
         mEditPocketView.onCommitSuccess();
+        EventBus.getDefault().post(new PocketEditEvent());
     }
 }

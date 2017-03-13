@@ -34,6 +34,13 @@
     <string name="pocket_bill_day">Bill Day</string>
     <string name="pocket_repay_day">Repayment Day</string>
 
+    <string name="nav_menu_pockets">Pockets</string>
+    <string name="nav_menu_manage">Manage</string>
+    <string name="nav_menu_common">Common</string>
+
+    <string name="action_manage_inouts">Manage Inouts</string>
+    <string name="action_manage_pockets">Manage Pockets</string>
+
     <!-- Pocket Types -->
     <!--<string name="type_unspecified">Unspecified</string>-->
     <!--<string name="type_credit">Credit</string>-->

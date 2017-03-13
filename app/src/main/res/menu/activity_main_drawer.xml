@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Pockets">
+        android:title="@string/nav_menu_pockets">
         <menu >
             <group
                 android:id="@+id/pocket_menu_group"
@@ -28,8 +28,21 @@
     </item>
 
     <item
+        android:id="@+id/manage"
+        android:title="@string/nav_menu_manage"
+        >
+        <menu>
+            <item
+                android:id="@+id/manage_inouts"
+                android:title="@string/action_manage_inouts" />
+            <item
+                android:id="@+id/manage_pockets"
+                android:title="@string/action_manage_pockets" />
+        </menu>
+    </item>
+    <item
         android:id="@+id/communicate"
-        android:title="Communicate">
+        android:title="@string/nav_menu_common">
         <menu>
             <item
                 android:id="@+id/nav_share"

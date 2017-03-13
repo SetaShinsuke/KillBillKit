@@ -51,16 +51,6 @@ public class User {
             //会保存数据库
             addPocket(Constants.DEFAULT_POCKET_NAME);
         }
-
-//        addPocket("Default");
-//        addPocket("余额宝");
-//        addPocket("支付宝");
-//        addPocket("现金");
-//        addPocket("招行银行卡",371);
-//        addPocket("招行信用卡",0);
-//        addPocket("QQ钱包");
-//        addPocket("微信钱包");
-//        addPocket("现金");
     }
 
     public String getUserId() {
@@ -83,7 +73,10 @@ public class User {
         return addPocket(pocketName,0);
     }
 
-    private void updatePockets(){
+    /**
+     * 更新持久化存储的 Pockets
+     */
+    private void updatePersistPockets(){
         StringBuilder sb = new StringBuilder();
         for(Pocket pocket : mPockets){
             sb.append(pocket.getId());
@@ -106,7 +99,7 @@ public class User {
             //TODO:保存到数据库
         }
         pocket.save2DB();
-        updatePockets();
+        updatePersistPockets();
         return pocket;
     }
 

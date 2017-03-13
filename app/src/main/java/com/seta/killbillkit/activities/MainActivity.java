@@ -16,11 +16,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.seta.killbillkit.R;
+import com.seta.killbillkit.events.InoutEvent;
+import com.seta.killbillkit.events.PocketEditEvent;
 import com.seta.killbillkit.framework.BaseActivity;
+import com.seta.killbillkit.mvpViews.MainView;
 import com.seta.killbillkit.presenters.MainPresenter;
 import com.seta.killbillkit.views.dialogs.CreateInoutDialog;
-import com.seta.killbillkit.viewsInterfaces.MainView;
 import com.seta.setakits.logs.LogX;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -45,6 +51,8 @@ public class MainActivity extends BaseActivity
         setSwipeBackEnable(false);
         initViews();
         initData();
+
+        EventBus.getDefault().register(this);
     }
 
     private void initViews(){
@@ -75,6 +83,7 @@ public class MainActivity extends BaseActivity
     private void initData(){
         this.mMainPresenter = new MainPresenter(this);
         this.mMainPresenter.init();
+        refreshNavPocketMenu(mMainPresenter.getPocketNames());
     }
 
     @Override
@@ -111,7 +120,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
+//    @Override
     public void refreshNavPocketMenu(ArrayList<String> titles) {
         Menu navMenu = mNavigationView.getMenu();
         int groupId = R.id.pocket_menu_group;
@@ -130,6 +139,16 @@ public class MainActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(PocketEditEvent event){
+        refreshNavPocketMenu(mMainPresenter.getPocketNames());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(InoutEvent inoutEvent){
+        mMainPresenter.loadInouts();
     }
 
     @Override
@@ -187,23 +206,14 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         LogX.fastLog("click menu id : " + id
                         + "\nOrder : " + item.getOrder());
-
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

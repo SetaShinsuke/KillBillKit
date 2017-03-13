@@ -18,7 +18,7 @@ import com.seta.killbillkit.api.models.Pocket;
 import com.seta.killbillkit.framework.BaseActivity;
 import com.seta.killbillkit.presenters.EditPocketPresenter;
 import com.seta.killbillkit.utils.UtilMethods;
-import com.seta.killbillkit.viewsInterfaces.EditPocketView;
+import com.seta.killbillkit.mvpViews.EditPocketView;
 import com.seta.setakits.ViewUtils;
 
 import static com.seta.killbillkit.api.models.Pocket.TYPE_CREDIT;

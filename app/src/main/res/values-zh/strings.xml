@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KillBillKit</string>
+
+    <string name="navigation_drawer_open">打开抽屉</string>
+    <string name="navigation_drawer_close">关闭抽屉</string>
+
+    <string name="action_settings">设置</string>
+    <string name="action_exit">退出</string>
+    <string name="action_commit">提交</string>
+
+    <string name="all_inouts">收入与支出 : </string>
+
+    <string name="manage_pockets">管理 Pocktes</string>
+    <string name="add_pocket">添加 Pocket</string>
+    <string name="add_budget">添加预算</string>
+    <string name="remove_pockets">删除 Pocket</string>
+    <string name="add_payment">添加支出</string>
+    <string name="add_income">添加收入</string>
+
+    <string name="total_balance">总余额 : </string>
+    <string name="total_balance_real">实际余额 : </string>
+
+    <string name="payment_name_hint">支出名称</string>
+    <string name="income_name_hint">收入名称</string>
+    <string name="amount_hint">金额</string>
+    <string name="pocket_type_hint">Pocket 类型</string>
+
+
+    <string name="invalid_name_amount">名字或金额不可用 ! </string>
+
+    <!-- 创建pocket -->
+    <string name="pocket_name_hint">Pocket 名称</string>
+    <string name="pocket_balance_hint">Pocket 余额</string>
+    <string name="pocket_bill_day">出账日</string>
+    <string name="pocket_repay_day">还款日</string>
+
+</resources>

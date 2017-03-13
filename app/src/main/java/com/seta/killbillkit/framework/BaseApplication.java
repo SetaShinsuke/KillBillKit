@@ -2,7 +2,6 @@ package com.seta.killbillkit.framework;
 
 import android.app.Application;
 
-import com.google.common.util.concurrent.UncaughtExceptionHandlers;
 import com.seta.killbillkit.api.KApi;
 import com.seta.setakits.logs.LogX;
 
