@@ -26,7 +26,9 @@ public class KApi {
 
     private User mUser;
 
+    //收支条目，只常存最近一周
     private static InoutContainer sInoutContainer = new InoutContainer();
+    //所有 Pocket
     private static PocketContainer sPocketContainer = new PocketContainer();
 
     private KApi() {

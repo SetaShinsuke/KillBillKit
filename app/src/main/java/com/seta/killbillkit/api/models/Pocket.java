@@ -39,11 +39,6 @@ public class Pocket implements DBable{
 
     }
 
-    public int calculateBalance(){
-        //默认当前 年月日
-        return this.calculateBalance(0,0,0);
-    }
-
     public int calculateBalance(int year , int month , int day){
         return getBalance();
     }
