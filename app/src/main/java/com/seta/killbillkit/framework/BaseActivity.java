@@ -5,7 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
+
+import com.seta.killbillkit.R;
 
 import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import me.imid.swipebacklayout.lib.Utils;
@@ -24,11 +29,30 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
         super.onCreate(savedInstanceState);
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
-
     }
 
     public Context getContext(){
         return this;
+    }
+
+    protected void initToolBar(Toolbar toolbar){
+        if(toolbar==null){
+            return;
+        }
+        setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(getColorPrimary());
+        toolbar.setTitle(getString(R.string.app_name));
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private int getColorPrimary() {
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
+        return typedValue.data;
     }
 
     public void enableActionbarBack(){
@@ -37,6 +61,14 @@ public class BaseActivity extends AppCompatActivity implements SwipeBackActivity
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

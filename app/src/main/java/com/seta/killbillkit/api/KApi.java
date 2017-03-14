@@ -31,6 +31,8 @@ public class KApi {
     //所有 Pocket
     private static PocketContainer sPocketContainer = new PocketContainer();
 
+    private InoutApi mInoutApi;
+
     private KApi() {
     }
 
@@ -67,6 +69,8 @@ public class KApi {
         api.getUser().restore();
         api.getUser().restorePockets();
 
+        api.setInoutApi(new InoutApi());
+
         api.getDatabase().export();
     }
 
@@ -93,5 +97,13 @@ public class KApi {
 
     public Context getAppContext() {
         return appContext;
+    }
+
+    public InoutApi getInoutApi() {
+        return mInoutApi;
+    }
+
+    public void setInoutApi(InoutApi inoutApi) {
+        mInoutApi = inoutApi;
     }
 }

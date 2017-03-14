@@ -208,6 +208,12 @@ public class MainActivity extends BaseActivity
                         + "\nOrder : " + item.getOrder());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        switch (id){
+            case R.id.manage_inouts:
+                Intent intent = new Intent(this,InoutListActivity.class);
+                startActivity(intent);
+                break;
+        }
         return true;
     }
 

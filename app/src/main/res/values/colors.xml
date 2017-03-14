@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorAccentDark">#C51162</color>
+    <color name="azusa_color">#1cb2b4</color>
+
+    <!-- 对比度：默认87%，最小54% -->
+    <color name="text_main">#404040</color>
+    <!--<color name="text_pale">#</color>-->
+    <color name="text_black_min">#9a9a9a</color>
 </resources>
