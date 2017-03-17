@@ -90,7 +90,7 @@ public class InoutDAO implements DAOHelpable<Inout> {
 
     @Override
     public Inout buildUniqueById(String id) {
-        return KApi.getApi().getInoutContainer().getUniqueTFromMem(id);
+        return KApi.getApi().getInoutApi().getUniqueTFromMem(id);
     }
 
     @Override

@@ -43,7 +43,7 @@ public class User {
             pocketIds.remove(pocketIds.size()-1);
         }
         for(String id: pocketIds){
-            Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(id);
+            Pocket pocket = KApi.getApi().getPocketApi().getUniqueTFromMem(id);
             mPockets.add(pocket);
         }
         //初次使用，创建默认Pocket
@@ -90,7 +90,7 @@ public class User {
 
     public Pocket addPocket(String pocketName , int balance){
         String pocketId = pocketName + System.currentTimeMillis();
-        Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
+        Pocket pocket = KApi.getApi().getPocketApi().getUniqueTFromMem(pocketId);
         pocket.setName(pocketName);
         pocket.setBalance(balance);
         if(!mPockets.contains(pocket)){
@@ -120,7 +120,7 @@ public class User {
     public int getDebt(){
         int debt = 0;
         for(Inout inout:mInouts){
-            Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(inout.getPocketId());
+            Pocket pocket = KApi.getApi().getPocketApi().getUniqueTFromMem(inout.getPocketId());
             if(pocket.getType().equals(Pocket.TYPE_CREDIT)){ //超前消费，增加负债
                 debt += inout.getAmount();
             }
@@ -137,16 +137,16 @@ public class User {
     public void addInout(String title , int amount , String pocketId){
         //添加Inout
         String id = title + System.currentTimeMillis();
-        Inout inout = KApi.getApi().getInoutContainer().getUniqueTFromMem(id);
+        Inout inout = KApi.getApi().getInoutApi().getUniqueTFromMem(id);
         inout.setTitle(title);
         inout.setAmount(amount);
         inout.setPocketId(pocketId);
         inout.setCreatedAt(System.currentTimeMillis());
         this.mInouts.add(inout);
-        KApi.getApi().getInoutContainer().updateTs2DB(inout);
+        KApi.getApi().getInoutApi().updateTs2DB(inout);
 
         //更新Pocket余额
-        Pocket pocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
+        Pocket pocket = KApi.getApi().getPocketApi().getUniqueTFromMem(pocketId);
         if( !pocket.getType().equals(Pocket.TYPE_CREDIT )){ //不是信用消费，直接扣除
             pocket.putBalance(amount);
             pocket.save2DB();
@@ -159,6 +159,6 @@ public class User {
 
     public void setInouts(ArrayList<Inout> inouts) {
         mInouts = inouts;
-        KApi.getApi().getInoutContainer().updateAll(inouts);
+        KApi.getApi().getInoutApi().updateAll(inouts);
     }
 }

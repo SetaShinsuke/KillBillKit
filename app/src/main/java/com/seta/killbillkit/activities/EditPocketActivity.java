@@ -78,7 +78,7 @@ public class EditPocketActivity extends BaseActivity implements EditPocketView{
     private void initData() {
         if (getIntent().getExtras() != null) {
             String pocketId = getIntent().getExtras().getString("pocket_id");
-            mPocket = KApi.getApi().getPocketContainer().getUniqueTFromMem(pocketId);
+            mPocket = KApi.getApi().getPocketApi().getUniqueTFromMem(pocketId);
         }
         //TODO:初始化显示数据
         if(mPocket!=null){

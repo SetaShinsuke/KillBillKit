@@ -28,7 +28,7 @@ public class InoutListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         InoutItemHolder inoutItemHolder = (InoutItemHolder) holder;
-        inoutItemHolder.loadData(inouts.get(position));
+        inoutItemHolder.loadData(inouts.get(inouts.size()-1-position));
     }
 
     @Override

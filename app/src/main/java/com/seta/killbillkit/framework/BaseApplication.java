@@ -1,6 +1,7 @@
 package com.seta.killbillkit.framework;
 
 import android.app.Application;
+import android.os.Handler;
 
 import com.seta.killbillkit.api.KApi;
 import com.seta.setakits.logs.LogX;
@@ -10,11 +11,13 @@ import com.seta.setakits.logs.LogX;
  */
 
 public class BaseApplication extends Application {
+    private static Handler sHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
         KApi.init(this);
+        sHandler = new Handler();
         initCrashHandelr();
     }
 
@@ -27,5 +30,10 @@ public class BaseApplication extends Application {
                 defaultHandler.uncaughtException(t,e);
             }
         });
+    }
+
+
+    public static Handler getHandler() {
+        return sHandler;
     }
 }

@@ -66,7 +66,7 @@ public class PocketDAO implements DAOHelpable<Pocket>{
 
     @Override
     public Pocket buildUniqueById(String id) {
-        return KApi.getApi().getPocketContainer().getUniqueTFromMem(id);
+        return KApi.getApi().getPocketApi().getUniqueTFromMem(id);
     }
 
     @Override

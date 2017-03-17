@@ -24,9 +24,13 @@ public class InoutItemHolder extends RecyclerView.ViewHolder {
     }
 
     public void loadData(Inout inout){
-        mTvCoverText.setText( inout.getPocketId() );
+//        mTvCoverText.setText( inout.getPocketId() );
         mTvTitle.setText(inout.getTitle());
         mTvDate.setText(DateUtils.formatYYYYMMDD(inout.getCreatedAt()) );
         mTvAmount.setText( inout.getAmount() + "" );
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        itemView.setOnClickListener(onClickListener);
     }
 }

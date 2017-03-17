@@ -6,7 +6,9 @@ import com.seta.killbillkit.api.models.Inout;
 import com.seta.killbillkit.api.models.Pocket;
 import com.seta.killbillkit.api.models.User;
 import com.seta.killbillkit.mvpViews.MainView;
+import com.seta.killbillkit.utils.ViewUtils;
 import com.seta.setakits.logs.LogX;
+import com.seta.setakits.threadUtils.ThreadPoolManager;
 
 import java.util.ArrayList;
 
@@ -43,16 +45,26 @@ public class MainPresenter {
         mainview.refreshFab(showingReal);
 
         //显示交易记录
-        String content = "";
-        ArrayList<Inout> inouts = KApi.getApi().getUser().getInouts();
-        for (Inout inout : inouts) {
-            content += inout.getTitle() + " : ";
-            if (inout.getAmount() > 0) {
-                content += "+ ";
+        ThreadPoolManager.getDbThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<Inout> inouts = KApi.getApi().getUser().getInouts();
+                ViewUtils.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String content = "";
+                        for (Inout inout : inouts) {
+                            content += inout.getTitle() + " : ";
+                            if (inout.getAmount() > 0) {
+                                content += "+ ";
+                            }
+                            content += inout.getAmount() + "\n";
+                        }
+                        mainview.refreshInoutsAll(content);
+                    }
+                });
             }
-            content += inout.getAmount() + "\n";
-        }
-        mainview.refreshInoutsAll(content);
+        });
     }
 
     public ArrayList<String> getPocketNames() {

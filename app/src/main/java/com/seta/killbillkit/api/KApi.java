@@ -5,8 +5,8 @@ import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import com.seta.killbillkit.api.db.Database;
-import com.seta.killbillkit.api.models.InoutContainer;
-import com.seta.killbillkit.api.models.PocketContainer;
+import com.seta.killbillkit.api.models.InoutDAO;
+import com.seta.killbillkit.api.models.PocketDAO;
 import com.seta.killbillkit.api.models.User;
 import com.seta.killbillkit.utils.Constants;
 import com.seta.setakits.SetaUtils;
@@ -27,11 +27,12 @@ public class KApi {
     private User mUser;
 
     //收支条目，只常存最近一周
-    private static InoutContainer sInoutContainer = new InoutContainer();
+//    private static InoutContainer sInoutContainer = new InoutContainer();
     //所有 Pocket
-    private static PocketContainer sPocketContainer = new PocketContainer();
+//    private static PocketContainer sPocketContainer = new PocketContainer();
 
     private InoutApi mInoutApi;
+    private PocketApi mPocketApi;
 
     private KApi() {
     }
@@ -64,12 +65,15 @@ public class KApi {
 
         //初始化API(数据库)
         api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
-        sInoutContainer.restore();
-        sPocketContainer.restore();
+//        sInoutContainer.restore();
+//        sPocketContainer.restore();
+
+        api.setInoutApi(new InoutApi(InoutDAO.getInstance()));
+        api.setPocketApi(new PocketApi(PocketDAO.getInstance()));
+
         api.getUser().restore();
         api.getUser().restorePockets();
 
-        api.setInoutApi(new InoutApi());
 
         api.getDatabase().export();
     }
@@ -79,13 +83,13 @@ public class KApi {
         return mDatabase;
     }
 
-    public InoutContainer getInoutContainer(){
-        return sInoutContainer;
-    }
+//    public InoutContainer getInoutContainer(){
+//        return sInoutContainer;
+//    }
 
-    public PocketContainer getPocketContainer() {
-        return sPocketContainer;
-    }
+//    public PocketContainer getPocketContainer() {
+//        return sPocketContainer;
+//    }
 
     public User getUser() {
         return mUser;
@@ -103,7 +107,15 @@ public class KApi {
         return mInoutApi;
     }
 
+    public PocketApi getPocketApi(){
+        return mPocketApi;
+    }
+
     public void setInoutApi(InoutApi inoutApi) {
         mInoutApi = inoutApi;
+    }
+
+    public void setPocketApi(PocketApi pocketApi) {
+        mPocketApi = pocketApi;
     }
 }
