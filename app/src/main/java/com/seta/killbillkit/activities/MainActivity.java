@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity
         EventBus.getDefault().register(this);
     }
 
-    private void initViews(){
+    private void initViews() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,14 +65,14 @@ public class MainActivity extends BaseActivity
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view,"Click",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, "Click", Snackbar.LENGTH_SHORT).show();
                 mMainPresenter.onFabClick();
             }
         });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                MainActivity.this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -80,7 +80,7 @@ public class MainActivity extends BaseActivity
         mNavigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void initData(){
+    private void initData() {
         this.mMainPresenter = new MainPresenter(this);
         this.mMainPresenter.init();
         refreshNavPocketMenu(mMainPresenter.getPocketNames());
@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void refreshInoutsAll(String allInouts) {
-        ((TextView)findViewById(R.id.inouts)).setText(allInouts);
+        ((TextView) findViewById(R.id.inouts)).setText(allInouts);
     }
 
     @Override
@@ -111,23 +111,23 @@ public class MainActivity extends BaseActivity
             }
         };
         mFab.hide(listener);
-        if(showBoth){
+        if (showBoth) {
             mFab.setImageResource(R.drawable.ic_sentiment_neutral_white_48dp);
             mFab.setBackgroundResource(R.color.colorPrimary);
-        }else {
+        } else {
             mFab.setImageResource(R.drawable.ic_sentiment_satisfied_white_48dp);
             mFab.setBackgroundResource(R.color.colorAccent);
         }
     }
 
-//    @Override
+    //    @Override
     public void refreshNavPocketMenu(ArrayList<String> titles) {
         Menu navMenu = mNavigationView.getMenu();
         int groupId = R.id.pocket_menu_group;
         Menu pocketListMenu = navMenu.getItem(0).getSubMenu();
         pocketListMenu.clear();
-        for(int i=0;i<titles.size();i++){
-            pocketListMenu.add(groupId,i,i,titles.get(i));
+        for (int i = 0; i < titles.size(); i++) {
+            pocketListMenu.add(groupId, i, i, titles.get(i));
         }
     }
 
@@ -142,12 +142,12 @@ public class MainActivity extends BaseActivity
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(PocketEditEvent event){
+    public void onEvent(PocketEditEvent event) {
         refreshNavPocketMenu(mMainPresenter.getPocketNames());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(InoutEvent inoutEvent){
+    public void onEvent(InoutEvent inoutEvent) {
         mMainPresenter.loadInouts();
     }
 
@@ -166,37 +166,36 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
         fastLog("Click menu : " + id);
 
-        if(item.getGroupId()==R.id.pocket_menu_group){
+        if (item.getGroupId() == R.id.pocket_menu_group) {
             mMainPresenter.onPocketMenuItemClick(item.getOrder());
             return true;
         }
 
         //TODO:添加/移除 pocket
-        if(id == R.id.action_add_payment){ //支出
+        if (id == R.id.action_add_payment) { //支出
             CreateInoutDialog dialog = new CreateInoutDialog();
             mDialog = dialog;
             dialog.setType(true);
             dialog.show(this);
             return true;
-        }else if(id == R.id.action_add_income) {
+        } else if (id == R.id.action_add_income) {
             CreateInoutDialog dialog = new CreateInoutDialog();
             mDialog = dialog;
             dialog.setType(false);
             dialog.show(this);
             return true;
-        }else if(id==R.id.action_add_budget) {
+        } else if (id == R.id.action_add_budget) {
             return true;
-        }else if (id == R.id.action_add_pockets) {
-            Intent intent = new Intent(this,EditPocketActivity.class);
+        } else if (id == R.id.action_add_pockets) {
+            Intent intent = new Intent(this, EditPocketActivity.class);
             startActivity(intent);
             return true;
-        }else if(id==R.id.action_remove_pockets){
+        } else if (id == R.id.action_remove_pockets) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -205,12 +204,12 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         LogX.fastLog("click menu id : " + id
-                        + "\nOrder : " + item.getOrder());
+                + "\nOrder : " + item.getOrder());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        switch (id){
+        switch (id) {
             case R.id.manage_inouts:
-                Intent intent = new Intent(this,InoutListActivity.class);
+                Intent intent = new Intent(this, InoutListActivity.class);
                 startActivity(intent);
                 break;
         }

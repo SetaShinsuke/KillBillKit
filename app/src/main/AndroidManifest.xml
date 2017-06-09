@@ -42,5 +42,12 @@
             android:name=".activities.InoutListActivity"
             android:theme="@style/BasicAppTheme.Swipable"
             />
+
+
+        <!--
+         Steam ****************************************************************
+         -->
+        <!--<activity android:name="com.seta.steam.activities.SteamMainActivity"-->
+            <!--/>-->
     </application>
 </manifest>

@@ -65,15 +65,12 @@ public class KApi {
 
         //初始化API(数据库)
         api.mDatabase = new Database(context, Constants.DATABASE_NAME , DEBUGABLE, Constants.DATABASE_VERSION);
-//        sInoutContainer.restore();
-//        sPocketContainer.restore();
 
         api.setInoutApi(new InoutApi(InoutDAO.getInstance()));
         api.setPocketApi(new PocketApi(PocketDAO.getInstance()));
 
         api.getUser().restore();
         api.getUser().restorePockets();
-
 
         api.getDatabase().export();
     }

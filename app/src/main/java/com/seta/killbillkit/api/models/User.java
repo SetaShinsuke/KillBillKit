@@ -33,6 +33,9 @@ public class User {
         lastSettleTime = System.currentTimeMillis();
     }
 
+    /**
+     * 从 SharedPreferences 中恢复 pockets
+     */
     public void restorePockets(){
         mPockets.clear();
 

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.seta.killbillkit"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,7 +21,7 @@ android {
         }
     }
 
-    dataBinding.enabled = true
+//    dataBinding.enabled = true
 }
 
 dependencies {
@@ -29,11 +29,31 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:25+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:appcompat-v7:25+'
+    compile 'com.android.support:design:25+'
     testCompile 'junit:junit:4.12'
+
     compile project(':setakits')
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'org.greenrobot:eventbus:3.0.0'
+    //滑动返回
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    //网络库
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.zhy:okhttputils:2.5.2'
+    //rxandroid
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    compile 'io.reactivex:rxjava:1.2.4'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    //log//log
+    compile 'log4j:log4j:1.2.17'
+    compile 'de.mindpipe.android:android-logging-log4j:1.0.2'
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
