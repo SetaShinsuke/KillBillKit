@@ -1,3 +1,4 @@
-include ':app',':setakits'
+include ':app', ':setakits', ':swipeback'
 
-project(':setakits').projectDir = new File(settingsDir,'../setakits/setakits')
+project(':setakits').projectDir = new File(settingsDir, '../setakits/setakits')
+project(':swipeback').projectDir = new File(rootDir, '../../../../azusa_2017/SwipeBackUtility/swipeBackUtility')

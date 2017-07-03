@@ -11,11 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.seta.killbillkit.R;
-
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.Utils;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
+import com.seta.swipebackutility.SwipeBackLayout;
+import com.seta.swipebackutility.Utils;
+import com.seta.swipebackutility.app.SwipeBackActivityBase;
+import com.seta.swipebackutility.app.SwipeBackActivityHelper;
 
 /**
  * Created by SETA_WORK on 2016/11/15.
